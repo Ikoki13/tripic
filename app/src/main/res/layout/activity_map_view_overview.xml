@@ -43,6 +43,8 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="12dp"
         android:background="?android:attr/colorMultiSelectHighlight"
+        android:onClick="navigateToPictureView"
+        android:padding="5dp"
         android:text="Picture View"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"

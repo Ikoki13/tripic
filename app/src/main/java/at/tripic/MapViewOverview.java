@@ -34,5 +34,10 @@ public class MapViewOverview extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void navigateToPictureView(View view) {
+        Intent intent = new Intent(this, PictureView.class);
+        startActivity(intent);
+    }
+
 }
 
