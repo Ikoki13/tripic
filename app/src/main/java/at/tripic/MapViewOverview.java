@@ -8,7 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapViewOverview extends AppCompatActivity {
 
@@ -16,8 +21,7 @@ public class MapViewOverview extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_view_overview);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+
     }
 
     public void navigateBack(View view) {
@@ -25,4 +29,10 @@ public class MapViewOverview extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void showDetailViewForSpot(View view) {
+        Intent intent = new Intent(this, DetailView.class);
+        startActivity(intent);
+    }
+
 }
+

@@ -9,7 +9,7 @@
     tools:context="at.tripic.Main">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/tirPicLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/tripic_logo"
@@ -23,29 +23,30 @@
         android:layout_marginEnd="8dp" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/useCurrentLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="9dp"
         android:text="Use my location"
-        app:layout_constraintLeft_toLeftOf="@+id/imageView"
-        app:layout_constraintRight_toRightOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:checked="true"
+        app:layout_constraintLeft_toLeftOf="@+id/tirPicLogo"
+        app:layout_constraintRight_toRightOf="@+id/tirPicLogo"
+        app:layout_constraintTop_toBottomOf="@+id/tirPicLogo"
         android:layout_marginStart="8dp" />
 
     <SearchView
-        android:id="@+id/searchView"
+        android:id="@+id/searchLocation"
         android:layout_width="136dp"
         android:layout_height="19dp"
         android:layout_marginTop="8dp"
         android:visibility="visible"
-        app:layout_constraintLeft_toLeftOf="@+id/checkBox"
-        app:layout_constraintRight_toRightOf="@+id/checkBox"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintLeft_toLeftOf="@+id/useCurrentLocation"
+        app:layout_constraintRight_toRightOf="@+id/useCurrentLocation"
+        app:layout_constraintTop_toBottomOf="@+id/useCurrentLocation" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/searchHotspots"
         android:layout_width="106dp"
         android:layout_height="48dp"
         android:layout_marginEnd="8dp"
@@ -54,12 +55,12 @@
         android:background="?android:attr/colorMultiSelectHighlight"
         android:onClick="searchHotspotsByLocation"
         android:text="Search Pics"
-        app:layout_constraintLeft_toLeftOf="@+id/seekBar"
-        app:layout_constraintRight_toRightOf="@+id/seekBar"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+        app:layout_constraintLeft_toLeftOf="@+id/radius"
+        app:layout_constraintRight_toRightOf="@+id/radius"
+        app:layout_constraintTop_toBottomOf="@+id/radius" />
 
     <SeekBar
-        android:id="@+id/seekBar"
+        android:id="@+id/radius"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -69,26 +70,26 @@
         android:layout_marginTop="8dp"
         android:visibility="visible"
         app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintLeft_toLeftOf="@+id/searchView"
-        app:layout_constraintRight_toRightOf="@+id/searchView"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintLeft_toLeftOf="@+id/searchLocation"
+        app:layout_constraintRight_toRightOf="@+id/searchLocation"
+        app:layout_constraintTop_toBottomOf="@+id/searchLocation" />
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/map"
+        android:id="@+id/gMaps"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        tools:context="com.example.mapwithmarker.MapsMarkerActivity"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/adView"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
 
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchHotspots"
+        tools:context="at.tripic.Main" />
 
     <TextView
         android:id="@+id/adView"

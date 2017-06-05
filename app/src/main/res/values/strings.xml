@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">tripic</string>
     <string name="title_activity_map_view_overview">MapViewOverview</string>
+    <string name="title_activity_detail_view">DetailView</string>
 </resources>
