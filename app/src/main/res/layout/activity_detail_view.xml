@@ -68,5 +68,72 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginBottom="8dp" />
 
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back"
+        app:layout_constraintVertical_bias="1.0">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                ads:srcCompat="@mipmap/park_1"
+                app:layout_constraintBottom_toTopOf="@+id/editText2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:numStars="5"
+                android:rating="5"
+                app:layout_constraintBottom_toTopOf="@+id/editText2"
+                app:layout_constraintLeft_toRightOf="@+id/imageView2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="352dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="8dp"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:text="Under the auspices of the 1964 Vienna International Garden Festival, a generous park area was created in 1963 and 1964 on an island between the Danube and the Old Danube, between the centre of Vienna and the districts of Floridsdorf and Donaustadt. The object of the exercise was to gradually clean up the existing site: a rubbish dump, a former parade ground that was a notorious site of executions during the Nazi years, and the &quot;Bretteldorf&quot; squatters' settlements.  Alfred Auer, Director of Vienna's Parks and Gardens at the time, was commissioned to design the park. He developed a many sided park area with special exhibition and theme gardens typical of a garden festival, including a rose garden, a lily garden, a nation´s garden, a Paracelsus herb garden, and a moorland garden. The park's landmark is the 250 meters tall Danube Tower, which offers a 360 degree view over the entire city. Today many of the features of the garden festival have been dismantled or adapted for other uses, such as a giant chess board, skatepark and a petting zoo. The park has become a favourite for all ages."
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:editable="false"/>
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
 
 </android.support.constraint.ConstraintLayout>
