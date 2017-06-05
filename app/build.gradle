@@ -10,6 +10,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
+
     }
     buildTypes {
         release {
@@ -29,10 +31,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.gms:play-services-ads:10.2.6'
     compile 'com.google.android.gms:play-services-maps:10.2.6'
-}
 
-repositories {
-    maven {
-        url 'https://maven.google.com'
-    }
 }
