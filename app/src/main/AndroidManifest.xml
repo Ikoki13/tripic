@@ -9,18 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-
-
         <uses-library android:name="com.google.android.maps" />
+
         <uses-permission android:name="android.permission.INTERNET" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <!--
-             The API key for Google Maps-based APIs.
-        -->
+        <!--              The API key for Google Maps-based APIs. -->
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -33,9 +30,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
+        <activity
+            android:name=".MapViewOverview"
+            android:label="@string/title_activity_map_view_overview"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

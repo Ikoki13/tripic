@@ -1,7 +1,9 @@
 package at.tripic;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -29,6 +31,11 @@ public class Main extends AppCompatActivity {
         //AdRequest adRequest = new AdRequest.Builder().build();
         //mAdView.loadAd(adRequest);
 
+    }
+
+    public void searchHotspotsByLocation(View view) {
+        Intent intent = new Intent(this, MapViewOverview.class);
+        startActivity(intent);
     }
 
 
