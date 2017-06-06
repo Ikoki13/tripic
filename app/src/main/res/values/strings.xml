@@ -3,4 +3,5 @@
     <string name="title_activity_map_view_overview">MapViewOverview</string>
     <string name="title_activity_detail_view">DetailView</string>
     <string name="title_activity_picture_view">PictureView</string>
+    <string name="title_activity_popup_view">PopupView</string>
 </resources>
