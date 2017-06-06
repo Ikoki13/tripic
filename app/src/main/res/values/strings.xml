@@ -4,4 +4,5 @@
     <string name="title_activity_detail_view">DetailView</string>
     <string name="title_activity_picture_view">PictureView</string>
     <string name="title_activity_popup_view">PopupView</string>
+    <string name="title_activity_local_photographers">LocalPhotographers</string>
 </resources>

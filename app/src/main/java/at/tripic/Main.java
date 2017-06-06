@@ -16,7 +16,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
-public class Main extends AppCompatActivity {
+public class Main extends AppCompatActivity implements OnMapReadyCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,7 @@ public class Main extends AppCompatActivity {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.gMaps);
 
+        mapFragment.getMapAsync(this);
         //adView impl
         //MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
         //mAdView = (AdView) findViewById(R.id.adView);
@@ -38,5 +39,14 @@ public class Main extends AppCompatActivity {
     public void searchHotspotsByLocation(View view) {
         Intent intent = new Intent(this, MapViewOverview.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        LatLng vienna = new LatLng(48.2082, 16.3738);
+        googleMap.addMarker(new MarkerOptions().position(vienna)
+                .title("Vienna"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(vienna));
+        googleMap.animateCamera( CameraUpdateFactory.zoomTo( 10.0f ) );
     }
 }

@@ -45,6 +45,10 @@
         <activity
             android:name=".PopupView"
             android:label="@string/title_activity_popup_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LocalPhotographers"
+            android:label="@string/title_activity_local_photographers"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
