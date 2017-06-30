@@ -2,17 +2,33 @@ package at.tripic;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.PopupWindow;
-import android.widget.RatingBar;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+import at.tripic.constants.triPicConstants;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 public class PictureView extends AppCompatActivity {
 
@@ -33,6 +49,62 @@ public class PictureView extends AppCompatActivity {
         et3.setKeyListener(null);
 
 
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        String url = Uri.parse(triPicConstants.URI_FLICKR_REST)
+                .buildUpon()
+                .appendQueryParameter("api_key", triPicConstants.API_KEY_FLICKR)
+                .appendQueryParameter("method", triPicConstants.METHOD_FLICKR_PHOTOS_SEARCH)
+                .appendQueryParameter("long", "48")
+                .appendQueryParameter("lat", "16")
+                .appendQueryParameter("geo_context", "2")
+                .appendQueryParameter("has_geo", "1")
+                .build()
+                .toString();
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Document doc;
+                        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                        DocumentBuilder builder = null;
+                        List<String> photoIdList = new ArrayList<>();
+
+                        try {
+                            builder = factory.newDocumentBuilder();
+                        } catch (ParserConfigurationException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            doc = builder.parse(new InputSource(new StringReader(response)));
+                            NodeList nodeListRsp = doc.getElementsByTagName("rsp");
+                            for (int i=0; i<nodeListRsp.getLength(); i++)
+                            {
+                                NodeList nodeListPhotos = ((Element)nodeListRsp.item(0)).getElementsByTagName("photos");
+                                NodeList nodeListPhotosChildren = nodeListPhotos.item(0).getChildNodes();
+                                for (int j=1; j<nodeListPhotosChildren.getLength(); j++)
+                                {
+                                    if (nodeListPhotosChildren.item(j).getNodeType() == 1) {
+                                        photoIdList.add(nodeListPhotosChildren.item(j).getAttributes().getNamedItem("id").getNodeValue());
+                                    }
+                                }
+                            }
+                        } catch (SAXException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("An error occured");
+            }
+        });
+        queue.add(stringRequest);
     }
 
     public void navigateBack(View view) {

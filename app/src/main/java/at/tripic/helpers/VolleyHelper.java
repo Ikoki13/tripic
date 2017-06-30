@@ -1,22 +1,13 @@
 package at.tripic.helpers;
 
-import android.app.Application;
-import android.app.DownloadManager;
 import android.content.Context;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonObject;
-
 import org.json.JSONObject;
-
-/**
- * Created by michael on 14/06/2017.
- */
 
 public class VolleyHelper {
 
@@ -31,7 +22,6 @@ public class VolleyHelper {
     }
 
     public static VolleyHelper getInstance(Context currentContext) {
-
         if(instance == null)
             instance = new VolleyHelper(currentContext);
 
@@ -42,7 +32,7 @@ public class VolleyHelper {
         requestQueue.add(newRequest);
     }
 
-    public StringRequest createVolleyRequest(String url, int method, Response.Listener<String> success, Response.ErrorListener<String> error) {
+    public StringRequest createVolleyRequest(String url, int method, Response.Listener<String> success, Response.ErrorListener error) {
         return new StringRequest(method, url, success, error);
     }
 
