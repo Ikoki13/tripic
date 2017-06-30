@@ -88,7 +88,18 @@ public class PictureView extends AppCompatActivity {
                                 for (int j=1; j<nodeListPhotosChildren.getLength(); j++)
                                 {
                                     if (nodeListPhotosChildren.item(j).getNodeType() == 1) {
-                                        photoIdList.add(nodeListPhotosChildren.item(j).getAttributes().getNamedItem("id").getNodeValue());
+                                        //get id from a photo and store
+                                        //photoIdList.add(nodeListPhotosChildren.item(j).getAttributes().getNamedItem("id").getNodeValue());
+
+                                        //construct static url for a photo as jpg and store it
+                                        photoIdList.add("https://farm"
+                                            + nodeListPhotosChildren.item(j).getAttributes().getNamedItem("farm").getNodeValue()
+                                            + ".staticflickr.com/"
+                                            + nodeListPhotosChildren.item(j).getAttributes().getNamedItem("server").getNodeValue() + "/"
+                                            + nodeListPhotosChildren.item(j).getAttributes().getNamedItem("id").getNodeValue() + "_"
+                                            + nodeListPhotosChildren.item(j).getAttributes().getNamedItem("secret").getNodeValue()
+                                            + ".jpg"
+                                        );
                                     }
                                 }
                             }
