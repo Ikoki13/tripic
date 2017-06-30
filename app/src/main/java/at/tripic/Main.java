@@ -15,13 +15,19 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import at.tripic.adapters.PictureAdapter;
+
 
 public class Main extends AppCompatActivity implements OnMapReadyCallback {
+    private PictureAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        adapter = new PictureAdapter(null, null);
 
         //map impl
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()

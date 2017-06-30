@@ -1,10 +1,13 @@
 package at.tripic;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,12 +28,23 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import at.tripic.adapters.PictureAdapter;
 import at.tripic.constants.triPicConstants;
+import at.tripic.interfaces.PictureHandler;
+import at.tripic.interfaces.PictureService;
+import at.tripic.services.FlickrPictureService;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class PictureView extends AppCompatActivity {
+public class PictureView extends AppCompatActivity implements PictureHandler {
+    private RecyclerView recyclerView;
+    private List<String> photoIdList;
+    private ProgressDialog progressDialog;
+    private PictureService pictureService;
+
 
     EditText et1;
     EditText et2;
@@ -41,17 +55,48 @@ public class PictureView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_view);
 
+        /*
         et1 = (EditText) findViewById(R.id.spot_1_desc);
         et1.setKeyListener(null);
-        et2 = (EditText) findViewById(R.id.spot_2_desc);
+        //et2 = (EditText) findViewById(R.id.spot_2_desc);
         et2.setKeyListener(null);
-        et3 = (EditText) findViewById(R.id.spot_3_desc);
+        //et3 = (EditText) findViewById(R.id.spot_3_desc);
         et3.setKeyListener(null);
+        */
+
+        pictureService = new FlickrPictureService(this, this);
+        recyclerView = (RecyclerView) findViewById(R.id.list_pictures);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        //photoIdList = pictureService.requestFlickrData();
+        pictureService.requestFlickrData();
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading flickr data");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+    }
+
+    @Override
+    public void HandleResult(List<String> data) {
+        progressDialog.dismiss();
+        //dbRepository.InsertWeatherData(locationName, data);
+        PictureAdapter adapter = new PictureAdapter(getApplicationContext(), data);
+        //recyclerView.swapAdapter(new PictureAdapter(getApplicationContext(), data), false);
+        recyclerView.swapAdapter(adapter, true);
+    }
+
+    @Override
+    public void HandleError(int errorCode) {
+        System.out.println("");
+
+    }
 
 
-
+    /*
+    private List<String> requestFlickrData() {
         RequestQueue queue = Volley.newRequestQueue(this);
-
         String url = Uri.parse(triPicConstants.URI_FLICKR_REST)
                 .buildUpon()
                 .appendQueryParameter("api_key", triPicConstants.API_KEY_FLICKR)
@@ -65,58 +110,61 @@ public class PictureView extends AppCompatActivity {
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Document doc;
-                        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                        DocumentBuilder builder = null;
-                        List<String> photoIdList = new ArrayList<>();
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Document doc;
+                    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder builder = null;
+                    List<String> photoIdList = new ArrayList<>();
 
-                        try {
-                            builder = factory.newDocumentBuilder();
-                        } catch (ParserConfigurationException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            doc = builder.parse(new InputSource(new StringReader(response)));
-                            NodeList nodeListRsp = doc.getElementsByTagName("rsp");
-                            for (int i=0; i<nodeListRsp.getLength(); i++)
+                    try {
+                        builder = factory.newDocumentBuilder();
+                    } catch (ParserConfigurationException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        doc = builder.parse(new InputSource(new StringReader(response)));
+                        NodeList nodeListRsp = doc.getElementsByTagName("rsp");
+                        for (int i=0; i<nodeListRsp.getLength(); i++)
+                        {
+                            NodeList nodeListPhotos = ((Element)nodeListRsp.item(0)).getElementsByTagName("photos");
+                            NodeList nodeListPhotosChildren = nodeListPhotos.item(0).getChildNodes();
+                            for (int j=1; j<nodeListPhotosChildren.getLength(); j++)
                             {
-                                NodeList nodeListPhotos = ((Element)nodeListRsp.item(0)).getElementsByTagName("photos");
-                                NodeList nodeListPhotosChildren = nodeListPhotos.item(0).getChildNodes();
-                                for (int j=1; j<nodeListPhotosChildren.getLength(); j++)
-                                {
-                                    if (nodeListPhotosChildren.item(j).getNodeType() == 1) {
-                                        //get id from a photo and store
-                                        //photoIdList.add(nodeListPhotosChildren.item(j).getAttributes().getNamedItem("id").getNodeValue());
+                                if (nodeListPhotosChildren.item(j).getNodeType() == 1) {
+                                    //get id from a photo and store
+                                    //photoIdList.add(nodeListPhotosChildren.item(j).getAttributes().getNamedItem("id").getNodeValue());
 
-                                        //construct static url for a photo as jpg and store it
-                                        photoIdList.add("https://farm"
-                                            + nodeListPhotosChildren.item(j).getAttributes().getNamedItem("farm").getNodeValue()
-                                            + ".staticflickr.com/"
-                                            + nodeListPhotosChildren.item(j).getAttributes().getNamedItem("server").getNodeValue() + "/"
-                                            + nodeListPhotosChildren.item(j).getAttributes().getNamedItem("id").getNodeValue() + "_"
-                                            + nodeListPhotosChildren.item(j).getAttributes().getNamedItem("secret").getNodeValue()
-                                            + ".jpg"
-                                        );
-                                    }
+                                    //construct static url for a photo as jpg and store it
+                                    photoIdList.add("https://farm"
+                                        + nodeListPhotosChildren.item(j).getAttributes().getNamedItem("farm").getNodeValue()
+                                        + ".staticflickr.com/"
+                                        + nodeListPhotosChildren.item(j).getAttributes().getNamedItem("server").getNodeValue() + "/"
+                                        + nodeListPhotosChildren.item(j).getAttributes().getNamedItem("id").getNodeValue() + "_"
+                                        + nodeListPhotosChildren.item(j).getAttributes().getNamedItem("secret").getNodeValue()
+                                        + ".jpg"
+                                    );
                                 }
                             }
-                        } catch (SAXException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
                         }
+                    } catch (SAXException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
+                }
+            }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 System.out.println("An error occured");
             }
         });
         queue.add(stringRequest);
+
+        return photoIdList;
     }
+    */
 
     public void navigateBack(View view) {
         Intent intent = new Intent(this, MapViewOverview.class);
@@ -142,5 +190,4 @@ public class PictureView extends AppCompatActivity {
         Intent intent = new Intent(this, PopupView.class);
         startActivity(intent);
     }
-
 }
