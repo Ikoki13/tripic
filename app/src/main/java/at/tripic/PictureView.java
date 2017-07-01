@@ -33,6 +33,7 @@ import at.tripic.adapters.PictureAdapter;
 import at.tripic.constants.triPicConstants;
 import at.tripic.interfaces.PictureHandler;
 import at.tripic.interfaces.PictureService;
+import at.tripic.model.PictureData;
 import at.tripic.services.FlickrPictureService;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -79,7 +80,7 @@ public class PictureView extends AppCompatActivity implements PictureHandler {
     }
 
     @Override
-    public void HandleResult(List<String> data) {
+    public void HandleResult(List<PictureData> data) {
         progressDialog.dismiss();
         //dbRepository.InsertWeatherData(locationName, data);
         PictureAdapter adapter = new PictureAdapter(getApplicationContext(), data);
