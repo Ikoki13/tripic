@@ -66,10 +66,7 @@ public class PictureView extends AppCompatActivity implements PictureHandler {
     }
 
     public void openPopupView(View view) {
-        //Intent intent = new Intent(this, PopupView.class);
-        //startActivity(intent);
-
-
+        //unused at the moment
         LayoutInflater inflater = (LayoutInflater)
                 this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         PopupWindow pw = new PopupWindow(
