@@ -39,10 +39,9 @@ public class PictureView extends AppCompatActivity implements PictureHandler {
         pictureService.requestFlickrData();
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading flickr data");
+        progressDialog.setMessage(getString(R.string.loading_flickr));
         progressDialog.setCancelable(false);
         progressDialog.show();
-
     }
 
     @Override
@@ -68,7 +67,6 @@ public class PictureView extends AppCompatActivity implements PictureHandler {
     public void openPopupView(View view) {
         //Intent intent = new Intent(this, PopupView.class);
         //startActivity(intent);
-
 
         LayoutInflater inflater = (LayoutInflater)
                 this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
