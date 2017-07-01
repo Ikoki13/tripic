@@ -31,7 +31,6 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureV
         return this.context;
     }
 
-
     @Override
     public PictureViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.picture_item, parent, false);
@@ -42,8 +41,7 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureV
     public void onBindViewHolder(PictureViewHolder holder, int position) {
         PictureData item = data.get(position);
         holder.bind(item);
-        Picasso.with(context).load(data.get(position).getImageAsUrl()).resize(120, 60).into(holder.flickrImage);
-        //Picasso.with(context).load(data.get(position)).resize(120, 60).into(holder.flickrImage);
+        Picasso.with(context).load(data.get(position).getImageAsUrl()).resize(200, 200).into(holder.flickrImage);
     }
 
     @Override
@@ -55,7 +53,6 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureV
         private ImageView flickrImage;
         private TextView flickrDesc;
 
-
         public PictureViewHolder(View itemView) {
             super(itemView);
 
@@ -64,11 +61,7 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureV
         }
 
         public void bind(PictureData item) {
-
-            flickrDesc.setText(item.getDesc());
-
-
-
+            //flickrDesc.setText(item.getDesc());
         }
     }
 }

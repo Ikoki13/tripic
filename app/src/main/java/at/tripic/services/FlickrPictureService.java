@@ -100,13 +100,9 @@ public class FlickrPictureService implements PictureService{
                                                 + ".jpg"
                                         );
 
-                                        if (photoIdList.size() == 5) {
+                                        if (photoIdList.size() == 20) {
                                             break;
                                         }
-
-
-
-
                                     }
                                 }
                             }
