@@ -16,11 +16,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import at.tripic.adapters.PictureAdapter;
+import at.tripic.datalayer.DbRepo;
 
 
 public class Main extends AppCompatActivity implements OnMapReadyCallback {
     private PictureAdapter adapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +32,7 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback {
         //map impl
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.gMaps);
-
         mapFragment.getMapAsync(this);
-        //adView impl
-        //MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
-        //mAdView = (AdView) findViewById(R.id.adView);
-        //AdRequest adRequest = new AdRequest.Builder().build();
-        //mAdView.loadAd(adRequest);
-
     }
 
     public void searchHotspotsByLocation(View view) {

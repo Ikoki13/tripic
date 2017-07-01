@@ -1,37 +1,29 @@
 package at.tripic.services;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
 import at.tripic.constants.triPicConstants;
 import at.tripic.dto.PictureItem;
 import at.tripic.interfaces.PictureHandler;
 import at.tripic.interfaces.PictureService;
-
 
 
 public class FlickrPictureService implements PictureService{

@@ -8,19 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
-
-import at.tripic.LocalPhotographers;
-import at.tripic.MapViewOverview;
 import at.tripic.PopupView;
 import at.tripic.R;
 import at.tripic.model.PictureData;
-
-import static android.support.v4.content.ContextCompat.startActivity;
 
 
 public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureViewHolder> {
@@ -76,8 +68,6 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureV
                     v.getContext().startActivity(intent);
                 }
             });
-
         }
-
     }
 }
