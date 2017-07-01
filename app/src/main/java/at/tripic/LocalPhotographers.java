@@ -13,11 +13,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
+import at.tripic.adapters.PhotographerAdapter;
 import at.tripic.services.FlickrPictureService;
 
 public class LocalPhotographers extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private PhotographerAdapter photographerAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +31,14 @@ public class LocalPhotographers extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.list_photographers);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+        photographerAdapter = new PhotographerAdapter(this);
+        recyclerView.setAdapter(photographerAdapter);
+
     }
 
     public void navigateBack(View view) {
         Intent intent = new Intent(this, PictureView.class);
         startActivity(intent);
     }
-
 }

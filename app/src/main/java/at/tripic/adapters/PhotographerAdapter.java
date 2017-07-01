@@ -1,6 +1,8 @@
 package at.tripic.adapters;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import at.tripic.R;
+import at.tripic.datalayer.DatabaseHelper;
+import at.tripic.datalayer.PhotographerContract;
 import at.tripic.datalayer.tablerepresentations.Photographer;
 
 /**
@@ -26,6 +30,26 @@ public class PhotographerAdapter extends RecyclerView.Adapter<PhotographerAdapte
 
     public PhotographerAdapter(Context context) {
         this.context = context;
+
+        // TODO
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String selectQuery = "SELECT  * FROM " + PhotographerContract.PhotographerEntry.TABLE_NAME;
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String[] queryColumns = {
+                PhotographerContract.PhotographerEntry.COLUMN_FIRSTNAME,
+                PhotographerContract.PhotographerEntry.COLUMN_LASTNAME,
+                PhotographerContract.PhotographerEntry.COLUMN_DESC,
+                PhotographerContract.PhotographerEntry.COLUMN_IMAGE
+        };
+        Cursor cursor = db.query(true, PhotographerContract.PhotographerEntry.TABLE_NAME, queryColumns, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
     }
 
     public List<Photographer> getPhotographerList() {
