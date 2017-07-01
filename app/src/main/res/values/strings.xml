@@ -5,4 +5,6 @@
     <string name="title_activity_picture_view">PictureView</string>
     <string name="title_activity_popup_view">PopupView</string>
     <string name="title_activity_local_photographers">LocalPhotographers</string>
+    <string name="search_pics">Search</string>
+    <string name="hint_searchbox">Enter location</string>
 </resources>
