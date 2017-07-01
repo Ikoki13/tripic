@@ -1,22 +1,27 @@
 package at.tripic.adapters;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.parse.ParseFile;
-import com.parse.ParseObject;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import at.tripic.LocalPhotographers;
+import at.tripic.MapViewOverview;
+import at.tripic.PopupView;
 import at.tripic.R;
 import at.tripic.model.PictureData;
+
+import static android.support.v4.content.ContextCompat.startActivity;
+
 
 public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureViewHolder> {
     private List<PictureData> data;
@@ -42,6 +47,7 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureV
         PictureData item = data.get(position);
         holder.bind(item);
         Picasso.with(context).load(data.get(position).getImageAsUrl()).resize(200, 200).into(holder.flickrImage);
+
     }
 
     @Override
@@ -62,6 +68,16 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureV
 
         public void bind(PictureData item) {
             //flickrDesc.setText(item.getDesc());
+            flickrImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    Intent intent = new Intent(v.getContext(), PopupView.class);
+                    v.getContext().startActivity(intent);
+                }
+            });
+
         }
+
     }
 }
