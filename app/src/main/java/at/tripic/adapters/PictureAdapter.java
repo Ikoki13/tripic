@@ -19,14 +19,17 @@ import at.tripic.R;
 import at.tripic.model.PictureData;
 
 public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureViewHolder> {
-    private List<String> data;
+    private List<PictureData> data;
     private Context context;
 
-    public PictureAdapter(Context context,List<String> data) {
+    public PictureAdapter(Context context,List<PictureData> data) {
         this.context = context;
         this.data = data;
     }
 
+    public Context getContext () {
+        return this.context;
+    }
 
     @Override
     public PictureViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,9 +39,9 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureV
 
     @Override
     public void onBindViewHolder(PictureViewHolder holder, int position) {
-        //PictureData item = data.get(position);
-        //holder.bind(item);
-        Picasso.with(context).load(data.get(position)).resize(120, 60).into(holder.flickrImage);
+        PictureData item = data.get(position);
+        holder.bind(item);
+        Picasso.with(context).load(data.get(position).getImageAsUrl()).resize(200, 200).into(holder.flickrImage);
     }
 
     @Override
@@ -50,7 +53,6 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureV
         private ImageView flickrImage;
         private TextView flickrDesc;
 
-
         public PictureViewHolder(View itemView) {
             super(itemView);
 
@@ -59,9 +61,7 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureV
         }
 
         public void bind(PictureData item) {
-
-            flickrDesc.setText(item.getDesc());
-
+            //flickrDesc.setText(item.getDesc());
         }
     }
 }

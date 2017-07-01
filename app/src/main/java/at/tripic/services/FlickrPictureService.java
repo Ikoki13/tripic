@@ -10,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -27,6 +28,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import at.tripic.constants.triPicConstants;
+import at.tripic.dto.PictureItem;
 import at.tripic.interfaces.PictureHandler;
 import at.tripic.interfaces.PictureService;
 
@@ -36,6 +38,8 @@ public class FlickrPictureService implements PictureService{
     private PictureHandler handler;
     private static RequestQueue queue;
     private static List<String> photoIdList = new ArrayList<>();
+    private static at.tripic.dto.Response r = new at.tripic.dto.Response();
+    private static PictureItem[] x;
 
 
     public FlickrPictureService(Context context, PictureHandler handler) {
@@ -95,8 +99,18 @@ public class FlickrPictureService implements PictureService{
                                                 + nodeListPhotosChildren.item(j).getAttributes().getNamedItem("secret").getNodeValue()
                                                 + ".jpg"
                                         );
+
+                                        if (photoIdList.size() == 20) {
+                                            break;
+                                        }
                                     }
                                 }
+                            }
+
+                            r.setlistNew(photoIdList);
+
+                            if (handler != null) {
+                                handler.HandleResult(r.AsModel());
                             }
                         } catch (SAXException e) {
                             e.printStackTrace();
@@ -111,6 +125,5 @@ public class FlickrPictureService implements PictureService{
             }
         });
         queue.add(stringRequest);
-        System.out.println(queue.toString());
     }
 }
