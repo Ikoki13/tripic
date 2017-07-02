@@ -59,7 +59,7 @@ public class FlickrPictureService implements PictureService{
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println(response);
+                        //System.out.println(response);
 
                         Document doc;
                         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

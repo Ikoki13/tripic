@@ -8,4 +8,5 @@
     <string name="search_pics">Search</string>
     <string name="hint_searchbox">Enter location</string>
     <string name="loading_flickr">Loading flickr data</string>
+    <string name="button_back">Back</string>
 </resources>

@@ -55,8 +55,8 @@ public class PictureView extends AppCompatActivity implements PictureHandler {
 
     @Override
     public void HandleError(int errorCode) {
-        System.out.println("");
-
+        // TODOI
+        //System.out.println("");
     }
 
     public void navigateBack(View view) {

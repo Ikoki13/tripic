@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import at.tripic.adapters.PictureAdapter;
+import at.tripic.datalayer.DatabaseHelper;
 import at.tripic.datalayer.DbRepo;
 
 

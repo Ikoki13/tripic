@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/colorMultiSelectHighlight"
         android:onClick="navigateBack"
-        android:text="Back"
+        android:text="@string/button_back"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"

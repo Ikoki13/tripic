@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:columnCount="2" android:rowCount="2">
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:columnCount="2"
+    android:rowCount="2"
+    >
 
     <ImageView
         android:id="@+id/photographerListItem_Image"
-        android:layout_columnSpan="1"
-        android:layout_rowSpan="2" />
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_rowSpan="2"/>
 
     <TextView
         android:id="@+id/photographerListItem_Name"
-        android:layout_columnSpan="1"
-        android:layout_rowSpan="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/photographerListItem_Description"
-        android:layout_columnSpan="1"
-        android:layout_rowSpan="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="TextView" />
 
 </GridLayout>

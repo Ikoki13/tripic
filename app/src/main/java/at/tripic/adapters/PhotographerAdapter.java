@@ -28,28 +28,9 @@ public class PhotographerAdapter extends RecyclerView.Adapter<PhotographerAdapte
     private List<Photographer> photographerList;
     private Context context;
 
-    public PhotographerAdapter(Context context) {
+    public PhotographerAdapter(Context context, List<Photographer> newList) {
         this.context = context;
-
-        // TODO
-        DatabaseHelper dbHelper = new DatabaseHelper();
-        String selectQuery = "SELECT  * FROM " + PhotographerContract.PhotographerEntry.TABLE_NAME;
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        String[] queryColumns = {
-                PhotographerContract.PhotographerEntry.COLUMN_FIRSTNAME,
-                PhotographerContract.PhotographerEntry.COLUMN_LASTNAME,
-                PhotographerContract.PhotographerEntry.COLUMN_DESC,
-                PhotographerContract.PhotographerEntry.COLUMN_IMAGE
-        };
-        Cursor cursor = db.query(true, PhotographerContract.PhotographerEntry.TABLE_NAME, queryColumns, null, null, null, null, null, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
+        photographerList = newList;
     }
 
     public List<Photographer> getPhotographerList() {
